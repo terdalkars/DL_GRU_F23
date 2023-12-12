@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
 
@@ -174,25 +173,36 @@
             <p style="text-align: justify;">The Recurrent Neural Network (RNN) encoder-decoder architecture is a framework commonly used for sequence-to-sequence tasks, such as machine translation or text summarization. The encoder processes the input sequence step by step, producing a fixed-size context vector that captures the input sequence's information. Each step of the encoder involves updating its hidden state based on the input at that time step. Once the entire input sequence is encoded, the decoder generates the output sequence step by step, utilizing the context vector produced by the encoder. Similar to the encoder, the decoder maintains a hidden state that evolves with each generated output. At each time step, the decoder combines its current hidden state with the context vector to produce the output. This architecture enables the model to handle input and output sequences of varying lengths, making it versatile for tasks involving sequential data. The Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) are often used as building blocks for the encoder-decoder architecture to address vanishing gradient problems and capture long-range dependencies in the data.</p>
             <img src="gru_gates.png" alt="GRU Gates" width="500">
             <p></p><b>Equations:</b></p>
-            <img src="gru_equation_5.png" alt="Reset gate eq" width="500">
-            <p>Reset gate equation</p>
+
+            <p>We start with calculating the update gate z_t for time step t using the formula:</p>
             <img src="gru_equation_6.png" alt="Update gate eq" width="500">
             <p>Update gate equation</p>
-            <img src="gru_equation_7.png" alt="Final hidden state eq" width="500">
-            <p>Final hidden state equation</p>
+            <p>When x_t is plugged into the network unit, it is multiplied by its own weight W(z). The same goes for h_(t-1) which holds the information for the previous t-1 units and is multiplied by its own weight U(z). Both results are added together and a sigmoid activation function is applied to squash the result between 0 and 1.</p>
+            <p>The update gate helps the model to determine how much of the past information (from previous time steps) needs to be passed along to the future. That is really powerful because the model can decide to copy all the information from the past and eliminate the risk of vanishing gradient problem. We will see the usage of the update gate later on. For now remember the formula for z_t.</p>
+
+            <p>Essentially, this gate is used from the model to decide how much of the past information to forget. To calculate it, we use:</p>
+            <img src="gru_equation_5.png" alt="Reset gate eq" width="500">
+            <p>Reset gate equation</p>
+            <p>This formula is the same as the one for the update gate. The difference comes in the weights and the gate’s usage.</p>
+
+            <p>Let’s see how exactly the gates will affect the final output. First, we start with the usage of the reset gate. We introduce a new memory content which will use the reset gate to store the relevant information from the past. It is calculated as follows:</p>
             <img src="gru_equation_8.png" alt="New hidden state eq" width="500">
             <p>New hidden state equation</p>
-            <p>Here, $$ 𝑥_t $$ is the input at time step 𝑡, $$ 𝒉_{t-1} $$ is the hidden state from the previous time step, 𝑊 and 𝒃 are weight matrices and bias vectors, respectively, and σ is the sigmoid activation function.</p>
-            <h4>Example:</h4>
-            <p>Let's consider a simple example of a GRU with a one-dimensional input (𝑥_t) and a hidden state (𝒉_t). Assume that the input size is 4, and the hidden state size is 3.</p>
+            <p>Multiply the input x_t with a weight W and h_(t-1) with a weight U.</p>
+            <p>Calculate the Hadamard (element-wise) product between the reset gate r_t and Uh_(t-1). That will determine what to remove from the previous time steps. Let’s say we have a sentiment analysis problem for determining one’s opinion about a book from a review he wrote. The text starts with “This is a fantasy book which illustrates…” and after a couple paragraphs ends with “I didn’t quite enjoy the book because I think it captures too many details.” To determine the overall level of satisfaction from the book we only need the last part of the review. In that case as the neural network approaches to the end of the text it will learn to assign r_t vector close to 0, washing out the past and focusing only on the last sentences.</p>
+            <p>Sum up the results of step 1 and 2.</p>
+            <p>Apply the nonlinear activation function tanh.</p>
+
+            <p>As the last step, the network needs to calculate h_t — vector which holds information for the current unit and passes it down to the network. In order to do that the update gate is needed. It determines what to collect from the current memory content — h’_t and what from the previous steps — h_(t-1). That is done as follows:</p>
+            <img src="gru_equation_7.png" alt="Final hidden state eq" width="500">
+            <p>Final hidden state equation</p>
+            <p>Apply element-wise multiplication to the update gate z_t and h_(t-1).</p>
+            <p>Apply element-wise multiplication to (1-z_t) and h’_t.</p>
+            <p>Sum the results from step 1 and 2.</p>
             <p>
-                // Example Equations
-                $$ r_t = σ(W_{ir}x_t + W_{hr}h_{t-1})$$
-                $$ z_t = σ(W_{iz}x_t + W_{hz}h_{t-1})$$
-                $$ 𝜏h_t = tanh(W_{ic}x_t + r_t ⋅ (W_{hc}h_{t-1}))$$
-                $$ h_t = (1 - z_t) ⋅ h_{t-1} + z_t ⋅ 𝜏h_t$$
+                Let’s bring up the example about the book review. This time, the most relevant information is positioned in the beginning of the text. The model can learn to set the vector z_t close to 1 and keep a majority of the previous information. Since z_t will be close to 1 at this time step, 1-z_t will be close to 0 which will ignore big portion of the current content (in this case the last part of the review which explains the book plot) which is irrelevant for our prediction.
             </p>
-            <p>In this example, the weight matrices 𝑊 and bias vectors 𝒃 are parameters that the model learns during training. The reset gate 𝑟_t determines how much of the previous hidden state to forget, the update gate 𝑧_t controls the information flow from the current input, and the candidate hidden state 𝜏h_t captures the new information to be added to the hidden state. The final hidden state 𝒉_t is a combination of the previous state and the new information, controlled by the update gate.</p>
+            <p>Now, you can see how GRUs are able to store and filter the information using their update and reset gates. That eliminates the vanishing gradient problem since the model is not washing out the new input every single time but keeps the relevant information and passes it down to the next time steps of the network. If carefully trained, they can perform extremely well even in complex scenarios.</p>
         </div>
 
 
@@ -419,6 +429,10 @@
         </p>
         <p>
             <a name="">[6] </a> <a href="https://arxiv.org/abs/1303.5778">Graves et al. (2013): <em>Speech Recognition with Deep Recurrent Neural Networks.</em></a>
+
+        </p>
+        <p>
+            <a name="">[7] </a> <a href="https://towardsdatascience.com/understanding-gru-networks-2ef37df6c9be">Understanding GRU Networks</a>
 
         </p>
 
