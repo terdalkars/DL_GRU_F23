@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Your Project Name</title>
+<title>Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation</title>
 <meta property="og:title" content=Your Project Name" />
 <meta name="twitter:title" content="Your Project Name" />
 <meta name="description" content="Your project about your cool topic described right here." />
@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 <link href="style.css" rel="stylesheet">
 
@@ -22,8 +23,8 @@
 <div class="nd-pageheader">
  <div class="container">
  <h1 class="lead">
- <nobr class="widenobr">Your Project Name</nobr>
- <nobr class="widenobr">For CS 7150</nobr>
+ <nobr class="widenobr">Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation</nobr>
+ <!-- <nobr class="widenobr">For CS 7150</nobr> -->
  </h1>
  </div>
 </div><!-- end nd-pageheader -->
@@ -31,34 +32,402 @@
 <div class="container">
 <div class="row">
 <div class="col justify-content-center text-center">
-<h2>An Analysis of [papername]</h2>
-<p>Describe the paper and the big question about it that interests you.</p>
+<h2>An Analysis of "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation"</h2>
+<p>Cho, Kyunghyun; van Merrienboer, Bart; Gulcehre, Caglar; Bahdanau, DZmitry; Bougares, Fethi; Schwenk, Holger; Bengio, Yoshua</p>
 </div>
 </div>
 <div class="row">
-<div class="col">
+    <div class="col">
+        <div style="text-align: justify;">
+            <h2>Motivation</h2>
+            <p>
+                The paper "Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation" by Kyunghyun Cho et al. proposes a novel approach to machine translation using a sequence-to-sequence model with an RNN (Recurrent Neural Network) encoder-decoder architecture. The authors introduce the Gated Recurrent Unit (GRU) as a key component, demonstrating its effectiveness in capturing and representing phrases in a source language for translation into a target language.
+            </p>
+            <p>
+                The main idea revolves around the use of a neural network to encode an input sequence (source language) into a fixed-size vector representation, which is then decoded into the target sequence. This end-to-end learning approach allows the model to automatically learn complex mappings between source and target languages without the need for manual feature engineering or alignment.
+            </p>
+            <b>Big Question of Interest:</b>
+            <p>
+                One intriguing aspect of this paper lies in the broader context of the evolution of neural machine translation (NMT). The big question that arises is: How can the lessons learned from this paper, which introduces a pioneering approach to sequence-to-sequence modeling, inform and inspire further advancements in the field?
+            </p>
+            <p>
+                This question encompasses various aspects, including the exploration of more advanced architectures beyond RNNs, the investigation of attention mechanisms, and the development of models that can handle nuances, idioms, and cultural subtleties in translation. Additionally, understanding the transferability of the proposed methods to other natural language processing tasks and the integration of external knowledge sources for improved translation quality are areas of interest.
+            </p>
+            <p>
+                In essence, the big question revolves around how the fundamental principles and innovations introduced in this paper can guide and shape the future of machine translation and broader applications of sequence-to-sequence models in natural language processing.
+            </p>
 
-<h2>Literature Review; Biography; Social Impact; Industry Applications; Follow-on Research; and Peer-Review</h2>
+            <h2>Literature Review</h2>
+            <p>
+                The development of Recurrent Neural Networks (RNNs) has been marked by several key milestones, with various technical papers contributing to their evolution. Here's a brief history of RNNs in terms of significant papers:
+                <ol>
+                    <li>
+                        <b>
+                            Jordan (1986): "Attractor Dynamics and Parallelism in a Connectionist Sequential Machine"
+                        </b>
+                        <br>Michael Jordan's work laid the foundation for the idea of using recurrent connections in neural networks. He introduced the concept of attractor dynamics and explored the potential of recurrent connections for sequence processing.
+                    </li>
+                    <li>
+                        <b>
+                            Elman (1990): "Finding Structure in Time"
+                        </b>
+                        <br>Jeffrey L. Elman proposed the Elman network, a type of simple recurrent neural network. Elman networks introduced the idea of a context layer, allowing them to capture dependencies over short time lags.
+                    </li>
+                    <li>
+                        <b>
+                            Hochreiter and Schmidhuber (1997): "Long Short-Term Memory"
+                        </b>
+                        <br>Sepp Hochreiter and Jürgen Schmidhuber introduced Long Short-Term Memory (LSTM) networks to address the vanishing gradient problem in traditional RNNs. LSTMs incorporate memory cells and gating mechanisms to better capture long-term dependencies.
+                    </li>
+                    <li>
+                        <b>
+                            Schmidhuber (1992): "Learning Composed Representations with Neural Networks"
+                        </b>
+                        <br>Jürgen Schmidhuber's work on learning composed representations helped establish the importance of neural networks with memory, paving the way for more sophisticated recurrent architectures.
+                    </li>
+                    <li>
+                        <b>
+                            Graves et al. (2009): "Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks"
+                        </b>
+                        <br>Graves and Schmidhuber introduced a multidimensional recurrent neural network, showcasing the potential of RNNs for sequential data processing. This work demonstrated improved performance in offline handwriting recognition tasks.
+                        </b>
+                    </li>
+                    <li>
+                        <b>
+                            Graves et al. (2013): "Speech Recognition with Deep Recurrent Neural Networks"
+                        </b>
+                        <br>This paper by Graves et al. demonstrated the effectiveness of deep recurrent neural networks, specifically LSTMs, for speech recognition. The deep RNNs showed improved performance over traditional models.
+                    </li>
 
-<p>Just as we have done in the role-playing exercise, analyze the paper from all perspectives.
-</p>
+                </ol>
+            </p>
+        </div>
 
-<p>Optionally, in addition to a reading-based analysis, implement the ideas of the paper in code, and report on your findings.
-</p>
+        <h2>Biography</h2>
+        <p style="text-align: center;">The authors of the paper completed their doctrates under the supervision of Yoshua Bengio and together worked on this paper during the same time.</p>
+        <div style="text-align: center;">
+            <h5>Kyunghyun Cho</h5>
+            <img src="cho.jpg" alt="Image of Kyunghyun Cho" width="300" height="300">
+            <p>
+                Professor at CILVR Group, NYU (2015-Present)
+                <br>Co-Founder & Senior Director of Frontier Research at Genentech Research and Early Development (2021-Present)
+                <br>Research scientist at Facebook AI Research (2017-2020)
+                <br>Postdoctoral fellow at Université de Montréal under the supervision of Prof. Yoshua Bengio (2014-2015)
+            </p>
+            <h5>Bart van Merrienboer</h5>
+            <img src="bart.jpg" alt="Image of Bart van Merrienboer" width="300" height="300">
+            <p>
+                Research Scientist at Google's DeepMind (2019-Present)
+                <br>Postdoctoral fellow at University of Montreal (2014-2019)
+            </p>
+            <h5>Caglar Gulcehre</h5>
+            <img src="caglar.jpg" alt="Image of Caglar Gulcehre" width="300" height="300">
+            <p>
+                Assistant Professor at EPFL (École polytechnique fédérale de Lausanne) (2023-Present)
+                <br>Research Scientist at Google's DeepMind (2017-2023)
+                <br>Postdoctoral under the supervision of Prof. Yoshua Bengio at Mila (2012-2017)
+                <br>Work related to reinforcement learning, deep learning and natural language understanding
+            </p>
+            <h5>Dzmitry Bahdanau</h5>
+            <img src="dzmitry.jpg" alt="Image of Dzmitry Bahdanau" width="300" height="300">
+            <p>
+                Adjunct Professor at McGill University (Present)
+                <br>Research Scientist at ServiceNow Element AI (2021-Present)
+                <br>PhD at Mila and Université de Montréal working with Yoshua Bengio (2014-2020)
+                <br>Master's from Jacobs University Bremen (2013-2015)
+            </p>
+            <h5>Fethi Bougares</h5>
+            <img src="fethi.jpg" alt="Image of Fethi Bougares" width="300" height="300">
+            <p>
+                Head of Research at ELYADATA (2021-Present)
+                <br>Associate Professor, University of Le Mans (2013-2021)
+                <br>Postdoctoral from Universite du Maine, France (2009-2013)
+                <br>Work related to Deep Learning, NLP, Machine Translation, Speech Recognition, Machine Learning
+            </p>
+            <h5>Holger Schwenk</h5>
+            <img src="holger.jpg" alt="Image of Holger Schwenk" width="300" height="300">
+            <p>
+                Research scientist at Facebook AI Research, Paris (2015-Present)
+                <br>Spent one year at the University of Montreal working with Y. Bengio (2014)
+                <br>Awarded senior member of the Institut Universitaire de France (2013)
+                <br>Professor of computer science at the University of Le Mans
+                <br>PhD in computer science from the University of Paris (1996)
+            </p>
+            <h5>Yoshua Bengio</h5>
+            <img src="bengio.jpg" alt="Image of Yoshua Bengio" width="300" height="300">
+            <p>
+                Founder and Scientific Director of Mila - Quebec AI Institute
+                <br>Won the Turing Award (2018)
+                <br>Professor at Université de Montréal (2013-Present)
+                <br>Co-directs the CIFAR Learning in Machines & Brains
+                <br>Postdoctoral from MIT (1991-1992)
+                <br>Machine Learning Researcher, Brain and cognitive sciences department, AI lab at MIT ((1991-1992))
+                <br>PhD in Computer Science from McGill University (1988-1991)
+            </p>
+        </div>
 
-<h3>References</h3>
+        <h2>Proposed Architecture</h2>
+        <div style="text-align: center;">
+            <img src="gru.png" alt="Gated Recurrent Unit" width="700">
+            <p style="text-align: justify;">The Gated Recurrent Unit (GRU) is a type of recurrent neural network (RNN) architecture designed to address the vanishing gradient problem in traditional RNNs. It consists of a set of recurrent units that maintain a hidden state and selectively update this state using gating mechanisms. The key components are the reset gate and update gate. The reset gate determines how much of the past information to forget, while the update gate controls how much of the new information to incorporate into the current hidden state. GRUs thus enable the model to capture long-range dependencies in sequential data by selectively updating and forgetting information, allowing for more effective learning and representation of temporal patterns. This architecture strikes a balance between the simplicity of traditional RNNs and the more complex Long Short-Term Memory (LSTM) networks, offering a computationally efficient solution for sequential data processing tasks.</p>
+            <img src="gru_architecture.png" alt="RNN Encoder Decoder Architecture" width="500">
+            <p style="text-align: justify;">The Recurrent Neural Network (RNN) encoder-decoder architecture is a framework commonly used for sequence-to-sequence tasks, such as machine translation or text summarization. The encoder processes the input sequence step by step, producing a fixed-size context vector that captures the input sequence's information. Each step of the encoder involves updating its hidden state based on the input at that time step. Once the entire input sequence is encoded, the decoder generates the output sequence step by step, utilizing the context vector produced by the encoder. Similar to the encoder, the decoder maintains a hidden state that evolves with each generated output. At each time step, the decoder combines its current hidden state with the context vector to produce the output. This architecture enables the model to handle input and output sequences of varying lengths, making it versatile for tasks involving sequential data. The Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) are often used as building blocks for the encoder-decoder architecture to address vanishing gradient problems and capture long-range dependencies in the data.</p>
+            <img src="gru_gates.png" alt="GRU Gates" width="500">
+            <p></p><b>Equations:</b></p>
+            <img src="gru_equation_5.png" alt="Reset gate eq" width="500">
+            <p>Reset gate equation</p>
+            <img src="gru_equation_6.png" alt="Update gate eq" width="500">
+            <p>Update gate equation</p>
+            <img src="gru_equation_7.png" alt="Final hidden state eq" width="500">
+            <p>Final hidden state equation</p>
+            <img src="gru_equation_8.png" alt="New hidden state eq" width="500">
+            <p>New hidden state equation</p>
+            <p>Here, $$ 𝑥_t $$ is the input at time step 𝑡, $$ 𝒉_{t-1} $$ is the hidden state from the previous time step, 𝑊 and 𝒃 are weight matrices and bias vectors, respectively, and σ is the sigmoid activation function.</p>
+            <h4>Example:</h4>
+            <p>Let's consider a simple example of a GRU with a one-dimensional input (𝑥_t) and a hidden state (𝒉_t). Assume that the input size is 4, and the hidden state size is 3.</p>
+            <p>
+                // Example Equations
+                $$ r_t = σ(W_{ir}x_t + W_{hr}h_{t-1})$$
+                $$ z_t = σ(W_{iz}x_t + W_{hz}h_{t-1})$$
+                $$ 𝜏h_t = tanh(W_{ic}x_t + r_t ⋅ (W_{hc}h_{t-1}))$$
+                $$ h_t = (1 - z_t) ⋅ h_{t-1} + z_t ⋅ 𝜏h_t$$
+            </p>
+            <p>In this example, the weight matrices 𝑊 and bias vectors 𝒃 are parameters that the model learns during training. The reset gate 𝑟_t determines how much of the previous hidden state to forget, the update gate 𝑧_t controls the information flow from the current input, and the candidate hidden state 𝜏h_t captures the new information to be added to the hidden state. The final hidden state 𝒉_t is a combination of the previous state and the new information, controlled by the update gate.</p>
+        </div>
 
-<p><a name="bottou-1990">[1]</a> <a href="https://papers.baulab.info/Bottou-1990.pdf"
-  >L&eacute;on Bottou and Patrick Gallinari.
-  <em>A framework for the cooperation of learning algorithms.</em></a>
-  Advances in neural information processing systems 3 (1990).
-</p>
 
-<h2>Team Members</h2>
-                                                   
-<p>Make sure to list here is who is on the team.</p>
+        <h2>Experiments</h2>
+        <div style="text-align: justify;">
+            <p>
+                WMT 2014 is a workshop of statistical machine translation; it has a collection of datasets. The authors use english-french dataset for translation tasks.
+                The baseline phrase-based SMT system was built using Moses software with its default settings and the BLEU scores were calculated. The Bilingual Evaluation Understudy Score, or BLEU for short, is a metric for evaluating a generated sentence to a reference sentence. A perfect match results in a score of 1, whereas a perfect mismatch results in a score of 0. Scores greater than 1 usually mean a better match.
+            </p>
+            <p>
+                The proposed <b>RNN Encoder-Decoder</b> model has 1000 hidden units with the update and reset gates in the encoder and decoder.
+                A rank-100 matrix, equivalent to learning an embedding of dimension 100 for each word was used. The activation function used for h in Eq. (8) is a hyperbolic tangent function.
+                All the weight parameters were initialized by sampling from an isotropic zero-mean Gaussian distribution with a standard deviation of 0.01, except for the recurrent weight parameters. For the recurrent weight matrices, they sampled from a white Gaussian distribution and used its left singular vectors matrix.
+            </p>
+            <p>
+                During training this RNN, frequency of phrase pairs are ignored in order to promote learning of linguistic regularities. Due to this, the model is expected to
+                <ol>
+                    <li>
+                        reduce the computational expense of randomly selecting phrase pairs from a large phrase table according to the normalized frequencies
+                    </li>
+                    <li>
+                        ensure that the RNN Encoder-Decoder does not simply learn to rank the phrase pairs according to their numbers of occurrences
+                    </li>
+                </ol>
+            </p>
 
-  
+            <div style="text-align: center;">
+                <img src="gru_sentences.png" alt="bleu scores" width="800">
+                <p>
+                    The table above shows the samples generated from the RNN Encoder–Decoder for each source phrase sorted by the scores.
+                </p>
+            </div>
+            <p>
+                To assess the performance of the proposed architecture, the authors also trained a more traditional <b>CSLM</b> (continuous space language model) on 7-grams. By doing this, they aimed to clarify whether the contributions from multiple neural networks in different parts of the SMT system add up or are redundant.
+                CSLM captures the frequency of the words as well while the RNN encoder-decoder model mainly learns linguistic characteristics.
+                <br>As shown in the table we see an improvement when the RNN model and CSLM model are both used; suggesting contributions from both models are not correlated.
+            </p>
+        </div>
+        <div style="text-align: center;"><img src="gru_blue_scores.png" alt="bleu scores" width="300"></div>
+
+        <div style="text-align: justify;">
+            <p>
+                <br>
+                Penalizing the unknown words using <b>word penalty (WP)</b> in the final model does not improve performance on test data as shown in the table above.
+            </p>
+            <p>
+                The RNN Encoder-Decoder projects a sequence of words to and from a continuous vector space. Word and phrase representations are plotted to understand if the model is learning semantically and syntactically.
+            </p>
+
+            <p>
+                The bottom plot shows the 2d word embeddings learnt by the RNN model; clear clusters of semantically similar words are observed.
+            </p>
+            <div style="text-align: center;"><img src="gru_words.png" alt="2d word representations"></div>
+            <p>
+                <br>
+                Similarly for phrases, both semantic and syntactic structures are captured. Both red and pink colour-coded plots at the bottom show semantically similar phrases related to time and countries respectively while the plot on the top right blue colour-coded shows syntactically similar phrases.
+            </p>
+            <div style="text-align: center;"><img src="gru_phrases.png" alt="2d phrase representations"></div>
+        </div>
+
+
+        <h2>Social Impact</h2>
+        <p align="justify">
+            GRU have led to innovative solutions in fields of finance, social media etc. Based on the application,
+            the impact of the GRU models vary and therefore certain generalized measures to avoid negative impacts have to be developed.
+        </p>
+        <p align="justify">
+            One of the prominent use cases for gate recurrent units has been sentiment analysis on social media platforms.
+            From that perspective, GRU is used to understand user emotions, for marketing and public opinion monitoring.
+            <b>GRUs applied to analyze human behavior data raise concerns about privacy and data breaches.</b>
+        </p>
+        <p align="justify">
+            Individuals' are subject to increased surveillance and monitoring leading to privacy concerns and in case of a data breach can compromise individuals' sensitive information.
+            It is therefore of high importance to define <b>comprehensive ethical guidelines</b> addressing issues such as <b>bias, privacy, and transparency</b>.
+            Standards for <b>anonymization of data</b> used in GRU training must be developed in order to reduce the risk of re-identification of individuals.
+        </p>
+
+        <h2>Applications</h2>
+        <p style="text-align: justify;">
+            The paper was presented at the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), and had a significant impact on the field of machine translation and natural language processing. The introduction of the sequence-to-sequence model with an RNN encoder-decoder architecture, particularly using the Gated Recurrent Unit (GRU), had several industrial implications:
+        </p>
+        <ol style="text-align: justify;">
+            <li>
+                <b>Improved Machine Translation Performance:</b>
+                <br>The paper demonstrated that the proposed RNN-based sequence-to-sequence model outperformed existing statistical machine translation systems. It showcased improved translation quality, especially for capturing long-range dependencies in sentences.</ br>
+            </li>
+            <li>
+                <b>End-to-End Learning:</b>
+                <br>The sequence-to-sequence model allowed for end-to-end learning, meaning that the entire translation process, from input to output, could be learned jointly. This eliminated the need for handcrafted features or intermediate representations, making the machine translation system more scalable and adaptable.</ br>
+            </li>
+            <li>
+                <b>Flexible Handling of Variable-Length Sequences:</b>
+                <br>RNNs, especially the GRU variant introduced in the paper, proved effective in handling variable-length input and output sequences. This flexibility was crucial for processing sentences of different lengths in machine translation, allowing for more accurate and context-aware translations.</ br>
+            </li>
+            <li>
+                <b>Wider Adoption of Neural Networks in Machine Translation:</b>
+                <br>The success of the sequence-to-sequence model in the paper contributed to the broader adoption of neural network architectures in machine translation systems. Neural machine translation (NMT) models, building on the principles introduced in this paper, became the state-of-the-art approach in the years that followed.</ br>
+            </li>
+            <li>
+                <b>Influence on Research Directions:</b>
+                <br>The paper influenced subsequent research in neural machine translation and related fields. Researchers started exploring variations of the encoder-decoder architecture, experimenting with different recurrent units, attention mechanisms, and optimization techniques.</ br>
+            </li>
+            <li>
+                <b>Transition from Phrase-Based to Neural Machine Translation:</b>
+                <br>The paper played a role in the transition from traditional phrase-based machine translation systems to neural machine translation systems. The latter became the dominant approach due to their ability to capture semantic relationships and context more effectively.</ br>
+            </li>
+            <li>
+                <b>Open Source Implementations and Frameworks:</b>
+                <br>The release of open-source implementations of the sequence-to-sequence model, often based on the findings in the paper, facilitated its practical application. This led to the development of machine translation systems using frameworks like TensorFlow and PyTorch.</ br>
+            </li>
+        </ol>
+        <p style="text-align: justify;">In summary, the paper had a profound impact on the industrial landscape of machine translation, influencing the adoption of neural network-based approaches and paving the way for advancements in natural language processing tasks beyond translation. The principles introduced in this paper continue to shape the development of state-of-the-art models in various language-related applications.</p>
+
+        <h2>Follow-on Research</h2>
+        <p style="text-align: justify;">
+            The paper opened up several research avenues and stimulated further exploration in the field of natural language processing (NLP) and machine translation. Some of the key research directions that emerged from this work include:
+        </p>
+        <ol style="text-align: justify;">
+            <li>
+                <b>Architectural Innovations in Sequence-to-Sequence Models:</b>
+                <br>The paper introduced the sequence-to-sequence model with an RNN encoder-decoder architecture, using the Gated Recurrent Unit (GRU). This sparked further exploration into architectural innovations, such as different types of recurrent units (LSTM, GRU), attention mechanisms, and variations in the encoder-decoder structure.</ br>
+            </li>
+            <li>
+                <b>Attention Mechanisms in NLP:</b>
+                <br>While the paper mentioned attention mechanisms, subsequent research focused extensively on refining and extending attention mechanisms for better handling long-range dependencies and improving translation quality. This led to the development of mechanisms like scaled dot-product attention and self-attention mechanisms (e.g., Transformer models).</ br>
+            </li>
+            <li>
+                <b>Handling Variable-Length Sequences:</b>
+                <br>The paper demonstrated the ability of RNNs to handle variable-length input and output sequences. Subsequent research delved into addressing challenges related to variable-length sequences, exploring methods like padding, masking, and length normalization, as well as more sophisticated approaches to handle context in a variable-length setting.</ br>
+            </li>
+            <li>
+                <b>Neural Machine Translation Improvements:</b>
+                <br>Researchers extended the work to enhance the performance of neural machine translation (NMT) systems. This includes investigating techniques to improve translation quality, reduce translation errors, and adapt NMT models to handle specific language pairs or domains.</ br>
+            </li>
+            <li>
+                <b>Multimodal and Multilingual Applications:</b>
+                <br>The success of the sequence-to-sequence model in machine translation inspired research in multimodal and multilingual applications. Researchers explored adapting similar architectures to tasks beyond translation, such as image captioning, summarization, and handling multiple languages simultaneously.</ br>
+            </li>
+            <li>
+                <b>Transfer Learning and Pre-training:</b>
+                <br>The idea of learning generic representations using sequence-to-sequence models opened avenues for transfer learning and pre-training in NLP. Researchers explored pre-training on large datasets and fine-tuning on specific tasks, leading to the development of models like BERT and GPT (Generative Pre-trained Transformer).</ br>
+            </li>
+            <li>
+                <b>Ethical and Bias Considerations:</b>
+                <br>As NMT models became more widely adopted, concerns regarding biases in translation outputs and ethical considerations in deploying these models arose. Research in this area focused on understanding and mitigating biases in NMT systems and addressing ethical concerns related to language and cultural nuances.</ br>
+            </li>
+            <li>
+                <b>Low-Resource and Domain-Specific Adaptation:</b>
+                <br>Researchers investigated techniques for adapting NMT models to low-resource languages and specific domains. This includes methods for leveraging additional monolingual or parallel data, as well as domain adaptation techniques to improve translation performance in specialized contexts.</ br>
+            </li>
+        </ol>
+        <p style="text-align: justify;">Overall, the paper stimulated a vibrant research community focused on advancing sequence-to-sequence models, attention mechanisms, and neural machine translation, leading to numerous innovations and breakthroughs in the broader field of natural language processing.</p>
+
+
+
+        <h2>Peer-Review</h2>
+        <h4>Review by Ramya - Score 7 (Clear Accept)</h4>
+        <p><b>Strengths</b></p>
+        <ul>
+            <li>Propose a novel approach to learn representations of phrases semantically and syntactically</li>
+            <li>Handle variable length input which is often the case in real world scenarios</li>
+            <li>Computationally efficient compared to LSTMs and solve the vanishing gradient problem in traditional RNNs</li>
+            <li>Clearly demonstrate the experiments, results and address the scope for improvement</li>
+        </ul>
+        <p><b>Weakness</b></p>
+        <ul>
+            <li>Do not compare GRU performance with state-of-the-art models, LSTM</li>
+            <li>Mention RNN Encoder-Decoder architecture is computationally more efficient than LSTM; they do not provide evidence of the same</li>
+        </ul>
+        </p>
+        <h4>Review by Shreyas - Score 8 (Strong Accept)</h4>
+        <p><b>Strengths</b></p>
+        <ul>
+            <li>
+                The introduction of the sequence-to-sequence model with RNN encoder-decoder architecture,
+                particularly the use of Gated Recurrent Unit (GRU), represents a significant leap.
+            </li>
+            <li>
+                Successfully demonstrates the effectiveness of end-to-end learning,
+                contributing to the scalability and adaptability of the machine translation.
+            </li>
+            <li>
+                Improved translation quality, especially in capturing long-range dependencies within sentences
+            </li>
+        </ul>
+        <p><b>Weakness</b></p>
+        <ul>
+            <li>Does not extensively explore different attention mechanisms</li>
+            <li>
+                GRUs may not capture long-term dependencies as effectively as more complex LSTMs
+            </li>
+            <li>
+                The model assumes fixed-length representations, which might limit its ability to handle variable-length sequences optimally.
+            </li>
+        </ul>
+        </p>
+
+        <!-- <p>Just as we have done in the role-playing exercise, analyze the paper from all perspectives. -->
+        <!-- </p> -->
+        <!-- <p>Optionally, in addition to a reading-based analysis, implement the ideas of the paper in code, and report on your findings. -->
+        <!-- </p> -->
+
+        <h3>References</h3>
+
+        <p>
+            <a name="">[1] </a> <a href="https://www.semanticscholar.org/paper/Attractor-dynamics-and-parallelism-in-a-sequential-Jordan/d76aafbeb54575859441a442376766c597f6bb52">Jordan (1986): <em>Attractor Dynamics and Parallelism in a Connectionist Sequential Machine.</em></a>
+
+        </p>
+        <p>
+            <a name="">[2] </a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1207/s15516709cog1402_1">Elman (1990): <em>Finding Structure in Time.</em></a>
+
+        </p>
+        <p>
+            <a name="">[3] </a> <a href="https://www.bioinf.jku.at/publications/older/2604.pdf">Hochreiter and Schmidhuber (1997): <em>Long Short-Term Memory.</em></a>
+
+        </p>
+        <p>
+            <a name="">[4] </a> <a href="https://people.idsia.ch/~juergen/onlinepub.html">Schmidhuber (1992): <em>Learning Composed Representations with Neural Networks.</em></a>
+
+        </p>
+        <p>
+            <a name="">[5] </a> <a href="https://papers.nips.cc/paper_files/paper/2008/hash/66368270ffd51418ec58bd793f2d9b1b-Abstract.html">Graves et al. (2009): <em>Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks.</em></a>
+
+        </p>
+        <p>
+            <a name="">[6] </a> <a href="https://arxiv.org/abs/1303.5778">Graves et al. (2013): <em>Speech Recognition with Deep Recurrent Neural Networks.</em></a>
+
+        </p>
+
+        <h2>Team Members</h2>
+
+        <h5>Ramya Kondrakunta</h5>
+        <h5>Shreyas Terdalkar</h5>
+
+    </div>
 </div><!--col-->
 </div><!--row -->
 </div> <!-- container -->
